@@ -1,4 +1,5 @@
 import requests  # εισαγωγή της βιβλιοθήκης
+import datetime
 
 url = input("insert url: ")  # προσδιορισμός του url
 
@@ -21,8 +22,10 @@ if "Set-Cookie" in headers:
     for cookie in cookies:
         print(i,".")
         print("Name:",cookie.name)
-        print("Value:",cookie.value)
-        print("Expires:",cookie.expires,"\n")
+        if cookie.expires is not None:
+            print("Expires:",datetime.datetime.fromtimestamp(float(cookie.expires)),"\n")
+        else:
+            print("Does not expire\n")
         i=i+1
 else:
     print("No Cookies\n")
